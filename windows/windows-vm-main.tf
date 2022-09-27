@@ -18,6 +18,35 @@ shutdown -r -t 10;
 EOF
 }
 
+
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "3.26.0"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "3.0.1"
+    }
+  }
+  required_version = ">= 1.1.0"
+
+  cloud {
+    organization = "pradeepbaral"
+
+    workspaces {
+      name = "aws-cloud"
+    }
+  }
+}
+
+provider "aws" {
+  region = "us-east-1"
+}
+
+
+
 # Create EC2 Instance
 resource "aws_instance" "windows-server" {
   ami                         = data.aws_ami.windows-2019.id
