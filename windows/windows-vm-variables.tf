@@ -8,6 +8,12 @@ variable "windows_instance_type" {
   default     = "t2.micro"
 }
 
+variable "aws_region" {
+  type        = string
+  description = "EC2 instance type for Windows Server"
+  default     = "us-east-1"
+}
+
 variable "windows_associate_public_ip_address" {
   type        = bool
   description = "Associate a public IP address to the EC2 instance"
