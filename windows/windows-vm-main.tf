@@ -28,7 +28,7 @@ resource "aws_instance" "windows-server" {
   source_dest_check           = false
   key_name                    = aws_key_pair.key_pair.key_name
   user_data                   = data.template_file.windows-userdata.rendered
-  
+
   # root disk
   root_block_device {
     volume_size           = var.windows_root_volume_size
@@ -45,7 +45,7 @@ resource "aws_instance" "windows-server" {
     encrypted             = true
     delete_on_termination = true
   }
-  
+
   tags = {
     Name        = "${lower(var.app_name)}-${var.app_environment}-windows-server"
     Environment = var.app_environment
@@ -54,7 +54,7 @@ resource "aws_instance" "windows-server" {
 
 # Create Elastic IP for the EC2 instance
 resource "aws_eip" "windows-eip" {
-  vpc  = true
+  vpc = true
   tags = {
     Name        = "${lower(var.app_name)}-${var.app_environment}-windows-eip"
     Environment = var.app_environment
